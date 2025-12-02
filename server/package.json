@@ -1,0 +1,17 @@
+{
+    "name": "climber-server",
+    "version": "1.0.0",
+    "description": "Node.js/Express backend",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "node dist/index.js",
+        "build": "tsc",
+        "dev": "ts-node src/index.ts"
+    },
+    "dependencies": {
+        "express":"5.2.1"
+    },
+    "devDependencies": {
+        "@types/express":"5.0.6"
+    }
+}
