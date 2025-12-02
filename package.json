@@ -1,0 +1,20 @@
+{
+  "name": "climber",
+  "version": "1.0.0",
+  "description": "Climb your way to financial success",
+  "homepage": "https://github.com/saintthorn/climber#readme",
+  "bugs": {
+    "url": "https://github.com/saintthorn/climber/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saintthorn/climber.git"
+  },
+  "license": "ISC",
+  "author": "Spencer Thornhill",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
