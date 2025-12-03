@@ -7,14 +7,12 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "target": "esnext",
     "lib": ["esnext"],
     "types": ["node"],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
 
     // Other Outputs
     "sourceMap": true,
