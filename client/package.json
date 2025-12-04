@@ -1,6 +1,7 @@
 {
     "name": "climber-client",
     "version": "1.0.0",
+    "type": "module",
     "description": "React/Vite frontend",
     "scripts": {
         "dev": "vite",
@@ -8,8 +9,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "react":"19.2.0",
-        "react-dom":"19.2.0"
+        "react":"19.2.1",
+        "react-dom":"19.2.1"
     },
     "devDependencies": {
         "@types/react":"19.2.7",
