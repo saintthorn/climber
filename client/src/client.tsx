@@ -91,7 +91,6 @@ function App() {
                     color: 'text.primary',
                 },
             }}>
-                <Toolbar/>
                 <IconButton onClick={toggleDrawer} sx={{ ml: 1, my: 1}}>
                     <MenuIcon />
                 </IconButton>
@@ -111,7 +110,6 @@ function App() {
                     duration: customTheme.transitions.duration.leavingScreen,
                 })
             }}>
-                <Toolbar/>
                 <Grid container spacing={3}>
                     {/* Placeholder for Graph component*/}
                     <TypedGridItem xs={12} component="div">
