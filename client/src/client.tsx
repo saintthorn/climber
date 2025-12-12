@@ -50,6 +50,7 @@ function App() {
     const toggleDrawer = () => {
         setOpen(prev => !prev);
     };
+    const [inputValue, setInputValue] = useState('');
     const DrawerList = (
         <List>
             <ListItem>
@@ -129,6 +130,14 @@ function App() {
                             </Button>
                         </Box>
                     </TypedGridItem>
+                    <div>
+                        <label htmlFor='textInput'>Enter text:</label>
+                        <input
+                            id='textInput'
+                            type='text'
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}/>
+                    </div>
                     <TypedGridItem xs={6} component="div">
                         <Box sx={{
                             height: 400,
