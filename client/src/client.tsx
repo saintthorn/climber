@@ -20,11 +20,12 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined'
 
 const customTheme = createTheme({
     palette: {
         primary: {
-            main: '#272757',
+            main: '#5D88BB',
         },
         secondary: {
             main: '#D4AF37',
@@ -39,7 +40,6 @@ const customTheme = createTheme({
     },
 });
 
-const drawerWidth = 100;
 const TypedGridItem: React.FC <any> = Grid;
 const openedWidth = 240;
 const closedWidth = 60;
@@ -92,7 +92,7 @@ function App() {
                 },
             }}>
                 <IconButton onClick={toggleDrawer} sx={{ ml: 1, my: 1}}>
-                    <MenuIcon />
+                    {open ? <ChevronLeftOutlinedIcon /> : <MenuIcon/>}
                 </IconButton>
                 <Box sx={{ p: 0 }}>
                     {DrawerList}
@@ -130,7 +130,21 @@ function App() {
                         </Box>
                     </TypedGridItem>
                     <TypedGridItem xs={6} component="div">
-                        <Typography>Additional data card</Typography>
+                        <Box sx={{
+                            height: 400,
+                            p: 2,
+                            boxShadow: 3,
+                            borderRadius: 1,
+                            backgroundColor: 'background.paper'
+                        }}>
+                            <Typography variant="h4" gutterBottom>
+                                Graph/Chart area
+                            </Typography>
+                            {/* Actual graphing component*/}
+                            <Button variant="contained" color="primary">
+                                Main Action
+                            </Button>
+                        </Box>
                     </TypedGridItem>
                 </Grid>
             </Box>
