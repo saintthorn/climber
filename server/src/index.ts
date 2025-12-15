@@ -15,6 +15,10 @@ app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(DIST_PATH, 'index.html'));
 });
 
+app.post('/endpoint', (req: Request, res: Response) => {
+    const body = req.body;
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

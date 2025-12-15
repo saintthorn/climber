@@ -51,6 +51,10 @@ function App() {
         setOpen(prev => !prev);
     };
     const [inputValue, setInputValue] = useState('');
+    const handleSubmit = async (event: string) => {
+        event.trim();
+        const data = { input: inputValue };
+    }
     const DrawerList = (
         <List>
             <ListItem>
