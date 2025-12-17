@@ -17,10 +17,9 @@ app.get('/', (req: Request, res: Response) => {
 
 app.post('/endpoint', (req: Request, res: Response) => {
     const body = req.body;
+  const word = "word";
 })
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });
-
-
