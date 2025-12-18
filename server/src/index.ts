@@ -18,6 +18,7 @@ app.get('/', (req: Request, res: Response) => {
 app.post('/endpoint', (req: Request, res: Response) => {
     const body = req.body;
   const word = "word";
+  const yes = "yes";
 })
 
 app.listen(PORT, () => {
