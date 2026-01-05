@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { 
-    Box, 
-    Grid, 
-    Drawer, 
+import {
+    Box,
+    Grid,
+    Drawer,
     Toolbar,
     List,
     ListItem,
     ListItemText,
     IconButton,
-    CssBaseline, 
-    Typography, 
-    Button, 
-    ThemeProvider, 
-    createTheme, 
+    CssBaseline,
+    Typography,
+    Button,
+    ThemeProvider,
+    createTheme,
     Menu,
-    Icon
+    Icon,
+    TextField, // Added TextField for better input
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined'
+
+interface Message {
+    id: number;
+    text: string;
+}
 
 const customTheme = createTheme({
     palette: {
@@ -47,14 +53,57 @@ const closedWidth = 60;
 
 function App() {
     const [open, setOpen] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [messages, setMessages] = useState<Message[]>([]);
+
     const toggleDrawer = () => {
         setOpen(prev => !prev);
     };
-    const [inputValue, setInputValue] = useState('');
-    const handleSubmit = async (event: string) => {
-        event.trim();
-        const data = { input: inputValue };
-    }
+
+    const fetchMessages = async () => {
+        try {
+            const response = await fetch('/messages');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data: Message[] = await response.json();
+            setMessages(data);
+        } catch (error) {
+            console.error("Error fetching messages:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchMessages();
+    }, []); // Empty dependency array means this runs once on mount
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        if (inputValue.trim() === '') {
+            return; // Don't send empty messages
+        }
+
+        try {
+            const response = await fetch('/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: inputValue }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            setInputValue(''); // Clear the input field
+            fetchMessages(); // Re-fetch messages to update the list
+        } catch (error) {
+            console.error("Error posting message:", error);
+        }
+    };
+
     const DrawerList = (
         <List>
             <ListItem>
@@ -73,9 +122,9 @@ function App() {
         </List>
     )
     return (
-        <Box sx={{ 
-            display: 'flex', 
-            backgroundColor: 'background.default', 
+        <Box sx={{
+            display: 'flex',
+            backgroundColor: 'background.default',
             minHeight: '100vh',
         }}>
             <CssBaseline/>
@@ -126,37 +175,37 @@ function App() {
                             backgroundColor: 'background.paper'
                         }}>
                             <Typography variant="h4" gutterBottom>
-                                Graph/Chart area
+                                Messages
                             </Typography>
-                            {/* Actual graphing component*/}
-                            <Button variant="contained" color="primary">
-                                Main Action
-                            </Button>
-                        </Box>
-                    </TypedGridItem>
-                    <div>
-                        <label htmlFor='textInput'>Enter text:</label>
-                        <input
-                            id='textInput'
-                            type='text'
-                            value={inputValue}
-                            onChange={(e) => setInputValue(e.target.value)}/>
-                    </div>
-                    <TypedGridItem xs={6} component="div">
-                        <Box sx={{
-                            height: 400,
-                            p: 2,
-                            boxShadow: 3,
-                            borderRadius: 1,
-                            backgroundColor: 'background.paper'
-                        }}>
-                            <Typography variant="h4" gutterBottom>
-                                Graph/Chart area
-                            </Typography>
-                            {/* Actual graphing component*/}
-                            <Button variant="contained" color="primary">
-                                Main Action
-                            </Button>
+                            <Box sx={{ maxHeight: 200, overflowY: 'auto', mb: 2 }}>
+                                {messages.length > 0 ? (
+                                    <List dense>
+                                        {messages.map((message) => (
+                                            <ListItem key={message.id}>
+                                                <ListItemText primary={message.text} />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                ) : (
+                                    <Typography variant="body2" color="text.secondary">
+                                        No messages yet.
+                                    </Typography>
+                                )}
+                            </Box>
+                            <form onSubmit={handleSubmit}>
+                                <TextField
+                                    id='textInput'
+                                    label='Enter Message'
+                                    variant='outlined'
+                                    fullWidth
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    sx={{ mb: 1 }}
+                                />
+                                <Button type="submit" variant="contained" color="primary">
+                                    Send Message
+                                </Button>
+                            </form>
                         </Box>
                     </TypedGridItem>
                 </Grid>
