@@ -46,7 +46,7 @@ const customTheme = createTheme({
     },
 });
 
-const TypedGridItem: React.FC <any> = Grid;
+// const TypedGridItem: React.FC <any> = Grid;
 const openedWidth = 240;
 const closedWidth = 60;
 
@@ -62,7 +62,7 @@ function App() {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch('/messages');
+            const response = await fetch('http://localhost:3000/messages');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -85,7 +85,7 @@ function App() {
         }
 
         try {
-            const response = await fetch('/messages', {
+            const response = await fetch('http://localhost:3000/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -164,9 +164,7 @@ function App() {
                     duration: customTheme.transitions.duration.leavingScreen,
                 })
             }}>
-                <Grid container spacing={3}>
-                    {/* Placeholder for Graph component*/}
-                    <TypedGridItem xs={12} component="div">
+                <Grid container spacing={3} sx={{ xs: 12 }}>
                         <Box sx={{
                             height: 400,
                             p: 2,
@@ -207,7 +205,6 @@ function App() {
                                 </Button>
                             </form>
                         </Box>
-                    </TypedGridItem>
                 </Grid>
             </Box>
         </Box>

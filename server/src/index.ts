@@ -1,6 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,7 @@ let nextMessageId = 1;
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.static(DIST_PATH));
 app.use(express.json()); // Middleware to parse JSON request bodies
 

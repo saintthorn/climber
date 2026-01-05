@@ -10,9 +10,11 @@
         "dev": "ts-node src/index.ts"
     },
     "dependencies": {
-        "express":"5.2.1"
+        "cors": "^2.8.5",
+        "express": "5.2.1"
     },
     "devDependencies": {
-        "@types/express":"5.0.6"
+        "@types/cors": "^2.8.19",
+        "@types/express": "5.0.6"
     }
 }
