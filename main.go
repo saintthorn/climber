@@ -1,5 +1,15 @@
 package main
 
+import (
+	"fmt"
+	"net/http"
+)
+
 func main() {
-	println("Hello, World!")
+	fmt.Print("Hello bitch")
+
+	router := http.NewServeMux()
+	router.Handle("/", http.FileServer(http.Dir("./static")))
+
+	http.ListenAndServe(":8000", nil)
 }
