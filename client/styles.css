@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Outfit";
+    src: url("/fonts/Outfit-Regular.ttf");
+}
+
+body {
+    font-family: "Outfit", Outfit-Regular, sans-serif;
+    background-color: moccasin;
+}
