@@ -11,5 +11,5 @@ func main() {
 	router := http.NewServeMux()
 	router.Handle("/", http.FileServer(http.Dir("./static")))
 
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":8000", router)
 }
